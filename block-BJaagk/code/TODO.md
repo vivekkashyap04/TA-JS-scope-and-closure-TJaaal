@@ -49,8 +49,12 @@ let percentage = (marks, total) => (marks * 100) / total;
 ```
 
 3. Why is a function definition an expression in JavaScript? Give one example of function expression.
+function add(a,b){
+  return a+b;
+}
 
 4. Why is a function call an expression in JavaScript?
+Because function is an object,expression always return value.
 
 5. Write VALID and INVALID next to each example below with the reason.
 
@@ -68,8 +72,15 @@ five = function () {
 ```
 
 6. What is the difference between function definition and function call? Explain with an example.
+function add(a,b){  // function definition
+  return a+b
+}
+
+add(3,4); // function call
 
 7. What is the similarities between function definition and function call?
+function definition is a expression. function is an object.
+function call is a expression. that always return value.
 
 8. Is the code below valid or invalid. Explain with reason.
 
@@ -97,4 +108,4 @@ calc(3,4,add);
 calc(4,5,mul);
 
 10. Explain what is callback function. Why you can pass a function inside a function?
-Answer:A function call in another function.
+Answer:A function is an expression, so we can pass a function inside a function.

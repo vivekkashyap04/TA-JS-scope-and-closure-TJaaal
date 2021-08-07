@@ -58,7 +58,7 @@ Find the output of the code snippets below:
 
 ```js
 let username = "Tyrion";
-sayHello(); // Tyrion
+sayHello(); // Error
 let sayHello = () => {
   console.log(username);
 };
@@ -67,7 +67,7 @@ let sayHello = () => {
 Find the output of the code snippets below:
 
 ```js
-sayHello(); // Cannot access 'username' before initialization
+sayHello(); // Error
 let username = "Tyrion";
 let sayHello = () => {
   console.log(username);
@@ -77,7 +77,7 @@ let sayHello = () => {
 Find the output of the code snippets below:
 
 ```js
-sayHello(); // undefined
+sayHello(); // Error
 var username = "Tyrion";
 let sayHello = () => {
   console.log(username);
@@ -88,7 +88,7 @@ Find the output of the code snippets below:
 
 ```js
 var username = "Tyrion";
-sayHello(); // Tyrion
+sayHello(); // Error
 let sayHello = () => {
   console.log(username);
 };

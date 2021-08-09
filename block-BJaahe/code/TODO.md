@@ -105,10 +105,10 @@ The returned function accepts a string `prefix` and returns `prefix` and `title`
 ```js
 function addDesignation(title) {
   // your code goes here
-    function prefix(str){
-      return str + ' ' + title;
-    }
-    return prefix;
+  function prefix(str) {
+    return str + " " + title;
+  }
+  return prefix;
 }
 
 let sales = addDesignation("Salesman");

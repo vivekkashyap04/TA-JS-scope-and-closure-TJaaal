@@ -183,11 +183,11 @@ The returned function accepts a string (children) and returns the children with 
 ```js
 function createTag(tag) {
   // your code goes here
-  let text = document.createElement(tag);
-  function inner(str) {
-    return (text.innerHTML = str);
-  }
-  return inner;
+  return function (str) {
+    let text = document.createElement(tag);
+    text.innerHTML = str;
+    return text;
+  };
 }
 
 let bold = createTag("b");

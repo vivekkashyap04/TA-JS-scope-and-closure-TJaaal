@@ -11,8 +11,8 @@
 
 ```js
 function loop(n, cb, tst, val) {
-  for (let i = n; cb(n);  tst(n)) {
-    val(n);
+  for (let i = n; cb(i);  i=tst(i)) {
+    val(i);
   }
   // Your code goes here
 }

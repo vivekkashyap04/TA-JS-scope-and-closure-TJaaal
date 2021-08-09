@@ -4,48 +4,75 @@
 
 ```js
 // Your code goes here
+function outer(name) {
+  function sayHello() {
+    alert(name);
+  }
+  return sayHello();
+}
 ```
 
 2. Write a function `delay` that accepts two arguments, a callback and the wait for the time in milliseconds (1000 ms is 1 second). `delay` should return a function that, when invoked waits for the specified amount of time before executing. (Use setTimeout)
 
 ```js
 // Your code goes here
+function timeOut(time) {
+  setTimeout(() => {
+    alert("hello");
+  }, time);
+}
+function delay(time, cb) {
+  return cb(time);
+}
 ```
 
 3. Write a function with a closure. The first function should only take one argument, someone's last name, and return the inner function. The returned `inner` function should take one more argument, someone's first name. When inner function when called it should console.log both the first name and the last name with a space.
 
 ```js
-function lastName() {
+function lastName(last) {
   //  Your code goes here
+  function firstName(name) {
+    console.log(`${name} ${last}`);
+  }
+  return firstName;
 }
 
-let lastNameLee = lastName('lee'); // logs nothing
-lastNameLee('Brett'); //logs 'Brett Lee'
+let lastNameLee = lastName("lee"); // logs nothing
+lastNameLee("Brett"); //logs 'Brett Lee'
 ```
 
 This function is useful in case you want to create name for multiple people with same last name.
 
 ```js
-lastNameLee('Jane'); //logs 'Jane Lee'
-lastNameLee('Lynne'); //logs 'Lynne Lee'
+lastNameLee("Jane"); //logs 'Jane Lee'
+lastNameLee("Lynne"); //logs 'Lynne Lee'
 ```
 
 4. Create a `storyWriter` function that returns an object with two methods. One method, `addWords` adds a word to your story and returns the story while the other one, `erase`, resets the story back to an empty string. Here is an implementation:
 
 ```js
 function storyWriter() {
-  // Your code goes here
+  let words = "";
+  return {
+    addWords: function (word) {
+      words += word;
+      return words;
+    },
+    erase: function () {
+      return (words = "");
+    },
+  };
 }
 
 // Test
 let farmLoveStory = storyWriter();
-farmLoveStory.addWords('There was once a lonely cow.'); // 'There was once a lonely cow.'
-farmLoveStory.addWords('It saw a friendly face.'); //'There was once a lonely cow. It saw a friendly face.'
+farmLoveStory.addWords("There was once a lonely cow."); // 'There was once a lonely cow.'
+farmLoveStory.addWords("It saw a friendly face."); //'There was once a lonely cow. It saw a friendly face.'
 farmLoveStory.erase(); //''
 
 let storyOfMyLife = storyWriter();
-storyOfMyLife.addWords('My code broke.'); // 'My code broke.'
-storyOfMyLife.addWords('I ate some ice cream.'); //'My code broke. I ate some ice cream.'
+storyOfMyLife.addWords("My code broke."); // 'My code broke.'
+storyOfMyLife.addWords("I ate some ice cream."); //'My code broke. I ate some ice cream.'
 storyOfMyLife.erase(); // ''
 ```
 
@@ -54,8 +81,13 @@ storyOfMyLife.erase(); // ''
 When `forEach` function is called it returns another function. When the returned function is called it returns the element from the array at specific index. Every time you call the returned function the value of index should increment.
 
 ```js
-function forEach() {
+function forEach(arr) {
   // Your code goes here
+  let index = 0;
+  function inner() {
+    return arr[index++];
+  }
+  return inner;
 }
 
 let next = [1, 2, 3, 4, 5];
@@ -73,14 +105,18 @@ The returned function accepts a string `prefix` and returns `prefix` and `title`
 ```js
 function addDesignation(title) {
   // your code goes here
+    function prefix(str){
+      return str + ' ' + title;
+    }
+    return prefix;
 }
 
-let sales = addDesignation('Salesman');
-sales('Main'); // Main Salesman
+let sales = addDesignation("Salesman");
+sales("Main"); // Main Salesman
 
-let manager = addDesignation('Manager');
-manager('Regional'); // Regional Manager
-manager('Head'); // Head Manager
+let manager = addDesignation("Manager");
+manager("Regional"); // Regional Manager
+manager("Head"); // Head Manager
 ```
 
 7. Create a function named `changeSalary` which accepts `currentSalary` (number) and returns an object that contains three methods
@@ -90,8 +126,19 @@ manager('Head'); // Head Manager
 - `current` will return the current salary returns the updated salary
 
 ```js
-function changeSalary() {
+function changeSalary(sal) {
   // Your code goes here
+  return {
+    raise: function () {
+      return sal + 500;
+    },
+    lower: function () {
+      return sal - 500;
+    },
+    current: function () {
+      return sal;
+    },
+  };
 }
 
 let sam = changeSalary(2000);
@@ -109,11 +156,24 @@ arya.lower(); // 3500
 
 ```js
 // Your code goes here
+function nameFactory(firstName, lastName) {
+  return {
+    getFullName: function () {
+      return firstName + " " + lastName;
+    },
+    setFirstName: function (first) {
+      return first + " " + lastName;
+    },
+    setLastName: function (last) {
+      return firstName + " " + last;
+    },
+  };
+}
 
-let arya = nameFactory('Arya', 'Stark');
+let arya = nameFactory("Arya", "Stark");
 arya.getFullName(); // "Arya Stark"
-arya.setFirstName('Jon'); // "Jon Stark"
-arya.setLastName('Lannister'); // "Jon Lannister"
+arya.setFirstName("Jon"); // "Jon Stark"
+arya.setLastName("Lannister"); // "Jon Lannister"
 ```
 
 9. Create a function named `createTag` which accepts an HTML element name and returns another function.
@@ -121,13 +181,18 @@ arya.setLastName('Lannister'); // "Jon Lannister"
 The returned function accepts a string (children) and returns the children with the tag you passed.
 
 ```js
-function createTag() {
+function createTag(tag) {
   // your code goes here
+  let text = document.createElement(tag);
+  function inner(str) {
+    return (text.innerHTML = str);
+  }
+  return inner;
 }
 
-let bold = createTag('b');
-bold('Hello World!'); // <b>Hello World!</b>
+let bold = createTag("b");
+bold("Hello World!"); // <b>Hello World!</b>
 
-let italic = createTag('i');
-italic('Hello World!'); // <i>Hello World!</i>
+let italic = createTag("i");
+italic("Hello World!"); // <i>Hello World!</i>
 ```
